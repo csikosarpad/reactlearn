@@ -11,3 +11,9 @@ Evaluation criteria: ( each mark includes previous mark criteria )
 - Configured webpack 
 - Configured babel, Configured tests script
 - Have dev and prod build commands(use evn variables)
+
+I used:
+    - node 10.13.0
+    - npm 6.4.1
+    - Idea Community
+    - windows 10
