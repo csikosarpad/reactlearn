@@ -1,30 +1,50 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+
+import { Header } from "./Header";
 import './css/style.css';
 
-function Title2(props) {
-  return <h2>Hello {props.name}</h2>;
-}
-function Title3(props) {
-  return <h3>Hello {props.name}</h3>;
-}
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
-const element1 = <Title2 name="World" />;
-const element2 = <Title3 name="Arpi" />;
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    // You can also log the error to an error reporting service
+    logErrorToMyService(error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+    return this.props.children;
+  }
+}
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'Arpad Csikos'
+      //hasError: false
     };
   }
 
   render() {
     return (
-      <h1>Hello {this.state.name}!</h1>
+    <ErrorBoundary>
+      <Header />
+    </ErrorBoundary>
     );
   }
 }
 
-render([<App />, element1, element2], document.getElementById('create-article-form'));
+render(<App />, document.getElementById('create-article-form'));
+//render([<App />, element1, element2], document.getElementById('create-article-form'));
