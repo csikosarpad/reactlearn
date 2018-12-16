@@ -14,17 +14,20 @@ export class InputText extends Component {
     this.setState({
         searchText: event.target.value
     });
+    this.props.searchTextChange(event.target.value)
   }
 
   render() {
+    const {name} = this.props;
+    const {searchText} = this.state;
+
     return (
         <React.Fragment>
-        <label htmlFor="searchID">{this.props.label}:</label>
         <input
             id = "searchID"
             type = "text"
-            value = {this.state.value}
-            name = {this.props.name}
+            value = {searchText}
+            name = {name}
             onChange = {this.handleChange}
             placeholder = "What are you looking for?" />
         </React.Fragment>

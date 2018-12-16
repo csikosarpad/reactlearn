@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 import { Header } from "./Header";
+import { Context } from "./Context";
 import './css/style.css';
 
 class ErrorBoundary extends Component {
@@ -33,14 +34,27 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      //hasError: false
+      searchParams: ''
     };
+    this.searchTerms = this.searchTerms.bind(this);
   }
 
+   searchTerms(values) {
+     console.log('APP: ',values);
+   };
+
+
   render() {
+    const {searchParams} = this.state;
+
     return (
     <ErrorBoundary>
-      <Header />
+      <Header
+        searchTerms = {this.searchTerms}
+      />
+      <Context
+        params = {searchParams}
+      />
     </ErrorBoundary>
     );
   }
